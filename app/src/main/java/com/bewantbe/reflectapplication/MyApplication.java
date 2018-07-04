@@ -32,6 +32,13 @@ public class MyApplication extends Application {
         Log.i(TAG, getTraceInfo());
 
         ReflectUtil.replaceCallBack();
+        try{
+            ReflectUtil.hookInstrumentation();
+        } catch ( Exception e ){
+            e.printStackTrace();
+        } finally{
+
+        }
     }
 
     @Override
