@@ -33,7 +33,7 @@ public class ReflectUtil {
             //这里没有直接反射出handler的mCallBack属性，而是直接使用了handler，主要是因为mCallBack可能为空
             //Handler.Callback callback = (Handler.Callback) callbackField.get(handler);
 
-            callBackField.set(handler, new myHandlerCallBack(handler));
+            callBackField.set(handler, new MyHandlerCallBack(handler));
 
         } catch (ClassNotFoundException e) {
             Log.i(TAG, "ClassNotFoundException------- " + e.toString());
