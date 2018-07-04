@@ -11,14 +11,36 @@ import android.util.Log;
 
 public class MyApplication extends Application {
     private static Context mContext;
+    public final static String TAG = "MyApplication";
+
+    private String getTraceInfo(){
+        int SEQ = 3;    // each time when one more depth of function invoke ,add this value one by one
+        String s = "[FILE] "
+                + Thread.currentThread().getStackTrace()[SEQ].getFileName()
+                + "  #  "
+                + Thread.currentThread().getStackTrace()[SEQ].getClassName()
+                + "  ->  "
+                + Thread.currentThread().getStackTrace()[SEQ].getMethodName();
+
+        return s;
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+
+        Log.i(TAG, getTraceInfo());
+
+        ReflectUtil.replaceCallBack();
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Log.i(TAG, getTraceInfo());
+
         mContext = getApplicationContext();
-
-        ReflectUtil.replaceCallBack();
-
     }
 
     public static Context getInstance() {
